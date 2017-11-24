@@ -1,13 +1,13 @@
-4e6344598f85a0631a600cf80849d2a8 *DESCRIPTION
+088cefa00b56bf53f835dcd5f0a13739 *DESCRIPTION
 75a69a3f8f211a92ce4bf5b86e7c771b *LICENSE
 b65ea8467e5c1335db56fa25b4267f06 *NAMESPACE
-c66e0f0207b9a0d86284aa0b49359e18 *NEWS.md
+47054c070f75295ba6cf36d92dbc73e8 *NEWS.md
 3a4e307a5c6dc99b7643e047972fb881 *R/RcppExports.R
 08713e855b59500ea23e6e1dc7eb9f28 *R/RcppThread-package.R
-c828dc1da14158218df5fd9a794ff07f *README.md
+593ec73ffd1eaf6ee552372891988997 *README.md
 c73acdfd3a491f259bee4878fa5f6172 *build/vignette.rds
 899c2cc253a846368a2a222de7e8e30c *inst/doc/RcppThread.Rmd
-6f958452b63bf2a76269d154247a632e *inst/doc/RcppThread.html
+fca592acf64ca8169f176accc4feadc8 *inst/doc/RcppThread.html
 08ce59e2a1e9203da5ab272ffd331a54 *inst/include/RcppThread.h
 ac13240757c7fca6dc075a994084bb13 *inst/include/RcppThread/RMonitor.hpp
 f7a8828b58e4df6f60530aca215057c1 *inst/include/RcppThread/Rcout.hpp
@@ -17,7 +17,7 @@ d2e16dcfe8ac31c430c32634cce09113 *man/RcppThread.Rd
 16265ccb7f49c4608810b4c41f2c1445 *src/Makevars
 2b7c46de8fe64e34c9c66f7fff9e708e *src/Makevars.win
 0a7cc4bc210319dad8acda3fd3d31f70 *src/RcppExports.cpp
-237ba1757ca7df3c220858b5dd61bb60 *src/test.cpp
+2002591473f63222b6ba1ae061918b50 *src/test.cpp
 ae3e5b64d134ccde1d7f2ab457b9a6a3 *tests/testthat.R
 6f0768d523d490f9271404d736399dc0 *tests/testthat/tests.R
 899c2cc253a846368a2a222de7e8e30c *vignettes/RcppThread.Rmd
