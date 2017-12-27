@@ -1,7 +1,7 @@
-088cefa00b56bf53f835dcd5f0a13739 *DESCRIPTION
+c6cd871d01426a710633e53ff7fcb492 *DESCRIPTION
 75a69a3f8f211a92ce4bf5b86e7c771b *LICENSE
 b65ea8467e5c1335db56fa25b4267f06 *NAMESPACE
-47054c070f75295ba6cf36d92dbc73e8 *NEWS.md
+dd65e580be752be775603f4cc9ec671c *NEWS.md
 3a4e307a5c6dc99b7643e047972fb881 *R/RcppExports.R
 08713e855b59500ea23e6e1dc7eb9f28 *R/RcppThread-package.R
 593ec73ffd1eaf6ee552372891988997 *README.md
@@ -17,7 +17,7 @@ d2e16dcfe8ac31c430c32634cce09113 *man/RcppThread.Rd
 16265ccb7f49c4608810b4c41f2c1445 *src/Makevars
 2b7c46de8fe64e34c9c66f7fff9e708e *src/Makevars.win
 0a7cc4bc210319dad8acda3fd3d31f70 *src/RcppExports.cpp
-2002591473f63222b6ba1ae061918b50 *src/test.cpp
+f29bef571f4c342dadd823decc36385c *src/test.cpp
 ae3e5b64d134ccde1d7f2ab457b9a6a3 *tests/testthat.R
-6f0768d523d490f9271404d736399dc0 *tests/testthat/tests.R
+c5293db691ce14a7f03759382014260c *tests/testthat/tests.R
 899c2cc253a846368a2a222de7e8e30c *vignettes/RcppThread.Rmd
