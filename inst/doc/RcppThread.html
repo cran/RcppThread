@@ -350,7 +350,8 @@ encouraged for R code).</li>
 </ul>
 
 <p>The class <code>ThreadPool</code> implements the thread pool pattern using <code>Thread</code> 
-objects and, thus, plays nicely with <code>RcppThread::checkUserInterrupt()</code> and <code>RcppThread:Rcout</code>.</p>
+objects and, thus, plays nicely with <code>RcppThread::checkUserInterrupt()</code> and 
+<code>RcppThread::Rcout</code>.</p>
 
 <h5>Example</h5>
 
@@ -372,7 +373,7 @@ void pool()
     for (int i = 0; i &lt; 10; i++)
         pool.push(task);
 
-    // wait for pool to finish work
+    // wait for pool to finish work and join all threads
     pool.join();
 }
 </code></pre>
@@ -386,6 +387,9 @@ Task fetched by thread 140201254156032
 
 Error in pool() : C++ call interrupted by user
 </code></pre>
+
+<p>You can also wait for all tasks to be done and re-use the thread pool by calling
+<code>pool.wait()</code> instead of <code>pool.join()</code> and then pushing new jobs to the pool.</p>
 
 </body>
 
