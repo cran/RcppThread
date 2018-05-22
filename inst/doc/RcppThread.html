@@ -215,7 +215,9 @@ parallelism.</li>
 
 <h2>Some background</h2>
 
-<p>Calling multi-threaded C++ code from R is a bit tricky because R is single-threaded. Using R&#39;s C API from multiple threads crashes your R session or causes other unexpected behavior. In particular, communication between your 
+<p>Calling multi-threaded C++ code from R is a bit tricky because R is 
+single-threaded. Using R&#39;s C API from multiple threads crashes your R session 
+or causes other unexpected behavior. In particular, communication between your 
 C++ code and R is problematic. We can neither check for user interruptions 
 during long computations nor should we print messages to the R console. </p>
 
@@ -226,7 +228,8 @@ RcppThread relieves us of that burden. </p>
 
 <p>It is not safe to call R&#39;s C API from multiple threads. It is safe, however,
 to call it from the master thread. That&#39;s the idea behind <code>RcppThread</code>&#39;s
-<code>checkUserInterrupt()</code> and <code>Rcout</code>. They behave almost like their <a href="https://github.com/RcppCore/Rcpp/blob/master/README.md">Rcpp</a> versions, but
+<code>checkUserInterrupt()</code> and <code>Rcout</code>. They behave almost like their 
+<a href="https://github.com/RcppCore/Rcpp/blob/master/README.md">Rcpp</a> versions, but
 only communicate with R when called from the master thread. Here&#39;s an example
 of their use with 
 <a href="http://en.cppreference.com/w/cpp/thread/thread"><code>std::thread</code></a>:</p>
@@ -389,7 +392,8 @@ Error in pool() : C++ call interrupted by user
 </code></pre>
 
 <p>You can also wait for all tasks to be done and re-use the thread pool by calling
-<code>pool.wait()</code> instead of <code>pool.join()</code> and then pushing new jobs to the pool.</p>
+<code>pool.wait()</code> instead of <code>pool.join()</code> and then pushing new jobs to the pool.
+A thread pool created with zero threads will do all work in the main thread.</p>
 
 </body>
 
