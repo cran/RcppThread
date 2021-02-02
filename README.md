@@ -1,9 +1,10 @@
 # RcppThread
 
-[![Travis-CI Build Status](https://travis-ci.org/tnagler/RcppThread.svg?branch=master)](https://travis-ci.org/tnagler/RcppThread) 
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tnagler/RcppThread?branch=master&svg=true)](https://ci.appveyor.com/project/tnagler/RcppThread)
+<!-- badges: start -->
+[![R build status](https://github.com/tnagler/RcppThread/workflows/R-CMD-check/badge.svg)](https://github.com/tnagler/RcppThread/actions)
 [![CRAN version](http://www.r-pkg.org/badges/version/RcppThread)](https://cran.r-project.org/package=RcppThread) 
 [![CRAN downloads](http://cranlogs.r-pkg.org/badges/RcppThread)](https://cran.r-project.org/package=RcppThread)
+<!-- badges: end -->
 
 Provides R-friendly threading functionality: 
 
@@ -21,8 +22,8 @@ requires a
 
 ## Functionality
 
-For a detailed description of its functionality and examples, see the 
-[vignette](https://arxiv.org/abs/1811.00450)
+For a detailed description of its functionality and examples, see the associated
+[JSS paper](https://doi.org/10.18637/jss.v097.c01)
 or the [API documentation](https://tnagler.github.io/RcppThread/).
 
 ## Installation
@@ -67,7 +68,7 @@ before including any headers in your source code.
 
 ## Automatic override of `std::cout` and `std::thread`
 
-There are preprocessor options to replace all occurences of `std::cout` and 
+There are preprocessor options to replace all occurrences of `std::cout` and 
 `std::thread` with calls to `RcppThread::Rcout` and `RcppThread::Thread` 
 (provided that the RcppThread headers are included first). To enable this, use 
 ```
@@ -75,3 +76,10 @@ There are preprocessor options to replace all occurences of `std::cout` and
 #define RCPPTHREAD_OVERRIDE_THREAD 1  // std::thread override
 ```
 before including the RcppThread headers.
+
+
+## References
+
+Nagler, T. (2021). "R-Friendly Multi-Threading in C++." _Journal of Statistical
+Software, Code Snippets_, *97*(1), 1-18. [doi: 10.18637/jss.v097.c01](https://doi.org/10.18637/jss.v097.c01)
+
