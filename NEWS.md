@@ -1,3 +1,22 @@
+# RcppThread 2.0.0
+
+* Add R function `detectCores()` (#48).
+
+* Add classes `ProgressCounter` and `ProgressBar` for tracking progress in long-
+  running loops (#49).
+
+* Increased speed due to work-stealing and lock-free pops (#51, #52, #53).
+
+* Free-standing `parallelFor()` and `parallelForEach()` functions now dispatch 
+  to a global thread pool that persists for the entire session. This 
+  significantly speeds up programs that repeatedly call these functions. (#54)
+  
+* New free-standing `push()`, `pushReturn()`/`async()`, and `wait()`, mirroring
+  functionality from `ThreadPool`. (#56)
+
+* Option to resize a thread pool (#56).
+
+
 # RcppThread 1.0.0
 
 * Release for JSS publication https://doi.org/10.18637/jss.v097.c01.

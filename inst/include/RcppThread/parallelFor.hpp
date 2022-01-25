@@ -1,4 +1,4 @@
-// Copyright © 2018 Thomas Nagler
+// Copyright © 2021 Thomas Nagler
 //
 // This file is part of the RcppThread and licensed under the terms of
 // the MIT license. For a copy, see the LICENSE.md file in the root directory of
@@ -13,13 +13,11 @@ namespace RcppThread {
 
 //! computes an index-based for loop in parallel batches.
 //! @param begin first index of the loop.
-//! @param size the loop runs in the range `[begin, begin + size)`.
+//! @param end the loop runs in the range `[begin, end)`.
 //! @param f a function (the 'loop body').
-//! @param nThreads the number of threads to use; the default uses the number
-//!   of cores in the machine;  if `nThreads = 0`, all work will be done in the
-//!   main thread.
+//! @param nThreads limits the number of threads used from the global pool.
 //! @param nBatches the number of batches to create; the default (0)
-//!   triggers a heuristic to automatically determine the number of batches.
+//!   uses work stealing to distribute tasks.
 //! @details Consider the following code:
 //! ```
 //! std::vector<double> x(10);
@@ -33,31 +31,35 @@ namespace RcppThread {
 //!     x[i] = i;
 //! });
 //! ```
-//! The function sets up a `ThreadPool` object to do the scheduling. If you
-//! want to run multiple parallel for loops, consider creating a `ThreadPool`
-//! yourself and using `ThreadPool::forEach()`.
+//! The function dispatches to a global thread pool, so it can safely be nested
+//! or called multiple times with almost no overhead.
 //!
 //! **Caution**: if the iterations are not independent from another,
 //! the tasks need to be synchronized manually (e.g., using mutexes).
 template<class F>
-inline void parallelFor(ptrdiff_t begin, ptrdiff_t size, F&& f,
-                        size_t nThreads = std::thread::hardware_concurrency(),
-                        size_t nBatches = 0)
+inline void
+parallelFor(int begin,
+            int end,
+            F f,
+            size_t nThreads = std::thread::hardware_concurrency(),
+            size_t nBatches = 0)
 {
-    ThreadPool pool(nThreads);
-    pool.parallelFor(begin, size, f, nBatches);
-    pool.join();
+    auto oldThreads = ThreadPool::globalInstance().getNumThreads();
+    ThreadPool::globalInstance().setNumThreads(nThreads); 
+
+    ThreadPool::globalInstance().parallelFor(begin, end, f, nBatches);
+    ThreadPool::globalInstance().wait();
+
+    ThreadPool::globalInstance().setNumThreads(oldThreads);
 }
 
 //! computes a range-based for loop in parallel batches.
 //! @param items an object allowing for `items.size()` and whose elements
 //!   are accessed by the `[]` operator.
 //! @param f a function (the 'loop body').
-//! @param nThreads the number of threads to use; the default uses the number
-//!   of cores in the machine;  if `nThreads = 0`, all work will be done in the
-//!   main thread.
+//! @param nThreads limits the number of threads used from the global pool.
 //! @param nBatches the number of batches to create; the default (0)
-//!   triggers a heuristic to automatically determine the number of batches.
+//!   uses work stealing to distribute tasks.
 //! @details Consider the following code:
 //! ```
 //! std::vector<double> x(10, 1.0);
@@ -71,21 +73,73 @@ inline void parallelFor(ptrdiff_t begin, ptrdiff_t size, F&& f,
 //!     xx *= 2;
 //! });
 //! ```
-//! The function sets up a `ThreadPool` object to do the scheduling. If you
-//! want to run multiple parallel for loops, consider creating a `ThreadPool`
-//! yourself and using `ThreadPool::forEach()`.
+//! The function dispatches to a global thread pool, so it can safely be nested
+//! or called multiple times with almost no overhead.
 //!
 //! **Caution**: if the iterations are not independent from another,
 //! the tasks need to be synchronized manually (e.g., using mutexes).
 template<class I, class F>
-inline void parallelForEach(I& items, F&& f,
-    size_t nThreads = std::thread::hardware_concurrency(),
-    size_t nBatches = 0)
+inline void
+parallelForEach(I& items,
+                F f,
+                size_t nThreads = std::thread::hardware_concurrency(),
+                size_t nBatches = 0)
 {
-    ThreadPool pool(nThreads);
-    pool.parallelForEach(items, f, nBatches);
-    pool.join();
+    // loop ranges ranges indicate iterator offset
+    auto begin = std::begin(items);
+    auto size = std::distance(begin, std::end(items));
+    parallelFor(
+      0, size, [f, begin](int i) { f(*(begin + i)); }, nThreads, nBatches);
 }
 
+//! pushes jobs to the global thread pool.
+//! @param f a function taking an arbitrary number of arguments.
+//! @param args a comma-seperated list of the other arguments that shall
+//!   be passed to `f`.
+//!
+//! The function returns void; if a job returns a result, use
+//! `async()`.
+template<class F, class... Args>
+inline void
+push(F&& f, Args&&... args)
+{
+    ThreadPool::globalInstance().push(std::forward<F>(f),
+                                      std::forward<Args>(args)...);
+}
+
+//! pushes jobs returning a value to the global thread pool.
+//! @param f a function taking an arbitrary number of arguments.
+//! @param args a comma-seperated list of the other arguments that shall
+//!   be passed to `f`.
+//! @return an `std::shared_future`, where the user can get the result and
+//!   rethrow exceptions.
+template<class F, class... Args>
+inline auto
+pushReturn(F&& f, Args&&... args) -> std::future<decltype(f(args...))>
+{
+    return ThreadPool::globalInstance().pushReturn(std::forward<F>(f),
+                                                   std::forward<Args>(args)...);
+}
+
+//! pushes jobs returning a value to the global thread pool.
+//! @param f a function taking an arbitrary number of arguments.
+//! @param args a comma-seperated list of the other arguments that shall
+//!   be passed to `f`.
+//! @return an `std::shared_future`, where the user can get the result and
+//!   rethrow exceptions.
+template<class F, class... Args>
+inline auto
+async(F&& f, Args&&... args) -> std::future<decltype(f(args...))>
+{
+    return pushReturn(std::forward<F>(f), std::forward<Args>(args)...);
+}
+
+//! waits for all jobs to finish and checks for interruptions, but only from the
+//! main thread. Does nothing when called from other threads.
+inline void
+wait()
+{
+    ThreadPool::globalInstance().wait();
+}
 
 }

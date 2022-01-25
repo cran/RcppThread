@@ -1,4 +1,4 @@
-// Copyright © 2018 Thomas Nagler
+// Copyright © 2021 Thomas Nagler
 //
 // This file is part of the RcppThread and licensed under the terms of
 // the MIT license. For a copy, see the LICENSE.md file in the root directory of
@@ -74,7 +74,7 @@ protected:
         }
     }
 
-    //! checks for user interruptions, but only if called from main thread 
+    //! checks for user interruptions, but only if called from main thread
     //! (otherwise last known state is returned).
     bool safelyIsInterrupted()
     {
@@ -91,7 +91,7 @@ protected:
     {
         std::lock_guard<std::mutex> lk(m_);
         msgs_ << object;
-        if ( calledFromMainThread() ) {
+        if ( calledFromMainThread() && (msgs_.str() != std::string("")) ) {
             // release messages in buffer
             Rprintf("%s", msgs_.str().c_str());
             R_FlushConsole();
