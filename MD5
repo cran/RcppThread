@@ -1,12 +1,12 @@
-65adee2cb40338f4c843bd6f1e730a64 *DESCRIPTION
+d23e48307a1dc26cd0aa7b21197b84d4 *DESCRIPTION
 fb52f36075635fcc8715ef126b3d4155 *LICENSE
 a2196c8e5057953202659e49a87f813a *NAMESPACE
-dae28fa02f8c2d345940d5dd5319f953 *NEWS.md
+83dac8dd0dbb32878998860cbe06225a *NEWS.md
 a980d49eb94f25f46e881204d99b21a9 *R/RcppThread-package.R
 1877e188f6dfa378794918030f134976 *R/detectCores.R
 31443a1fa1600ff9cee4be8c4c866220 *R/inline.R
 3be791bcb54417e7a84d24375a31ffb5 *README.md
-074871fb81f6f98a867cd72d5c1240a8 *build/partial.rdb
+f9c2f75cec52684e5f269bc5c14eb370 *build/partial.rdb
 c639f7a7ff3efc07980ac8cfedee54a2 *build/vignette.rds
 d44ab91eef4935da13e8108b94c8a2d6 *inst/CITATION
 3b638bc3153596cb5a1dd54773a97bef *inst/doc/RcppThread-vignette.pdf
@@ -24,5 +24,5 @@ f39ba6717c8a86d3a6c46a7ba538bc75 *man/detectCores.Rd
 2c6b35ba9a5c69525e4a075bd13e819c *src/detectCores.cpp
 890820cae34b55397bb940eb79a58683 *tests/tests.cpp
 ae3e5b64d134ccde1d7f2ab457b9a6a3 *tests/testthat.R
-81d99f547de75419695bc31b118b84f5 *tests/testthat/tests.R
+c4be1f4e54c809e54ca283874bb3a1a6 *tests/testthat/tests.R
 312afe272a7f384fd2caed54c1af7d85 *vignettes/RcppThread-vignette.pdf.asis
