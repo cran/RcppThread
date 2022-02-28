@@ -1,4 +1,4 @@
-// Copyright © 2021 Thomas Nagler
+// Copyright © 2022 Thomas Nagler
 //
 // This file is part of the RcppThread and licensed under the terms of
 // the MIT license. For a copy, see the LICENSE.md file in the root directory of
@@ -8,6 +8,7 @@
 
 #include "RcppThread/RMonitor.hpp"
 #include "RcppThread/Rcout.hpp"
+#include "RcppThread/Rcerr.hpp"
 
 #include <thread>
 #include <future>
@@ -81,6 +82,7 @@ public:
         auto timeout = std::chrono::milliseconds(250);
         while (future_.wait_for(timeout) != std::future_status::ready) {
             Rcout << "";
+            Rcerr << "";
             if (isInterrupted())
                 break;
             std::this_thread::yield();
@@ -88,6 +90,7 @@ public:
         if (thread_.joinable())
             thread_.join();
         Rcout << "";
+        Rcerr << "";
         checkUserInterrupt();
     }
 

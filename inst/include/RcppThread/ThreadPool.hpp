@@ -1,4 +1,4 @@
-// Copyright © 2021 Thomas Nagler
+// Copyright © 2022 Thomas Nagler
 //
 // This file is part of the RcppThread and licensed under the terms of
 // the MIT license. For a copy, see the LICENSE.md file in the root directory of
@@ -8,6 +8,7 @@
 
 #include "RcppThread/RMonitor.hpp"
 #include "RcppThread/Rcout.hpp"
+// #include "RcppThread/Rcerr.hpp"
 #include "RcppThread/quickpool.hpp"
 
 #include <atomic>
@@ -232,10 +233,12 @@ ThreadPool::wait()
     do {
         pool_->wait(100);
         Rcout << "";
+        // Rcerr << "";
         checkUserInterrupt();
 
     } while (!pool_->done());
     Rcout << "";
+    // Rcerr << "";
 }
 
 //! waits for all jobs to finish.
