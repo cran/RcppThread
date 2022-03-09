@@ -1,12 +1,13 @@
-b57b87d9a9c992572d8da9d005505c2d *DESCRIPTION
+3cbe9d0af77c87f856b937a247af2ba7 *DESCRIPTION
 38ad7480accd3f5ada7abd78fc1cede9 *LICENSE
-a2196c8e5057953202659e49a87f813a *NAMESPACE
-754446cd6d4625f988192104404b9bcc *NEWS.md
+7b944be35c2b2a7c0dad5b060a8c4eee *NAMESPACE
+4649bf60e5d3daf9927370d8597604a0 *NEWS.md
+e6f0920426bf531a229f8c513130179a *R/LdFlags.R
 a980d49eb94f25f46e881204d99b21a9 *R/RcppThread-package.R
 1877e188f6dfa378794918030f134976 *R/detectCores.R
 31443a1fa1600ff9cee4be8c4c866220 *R/inline.R
-70f451786c5227825775f4b12c66a7d6 *README.md
-924a0cd415c0f5d67bb96869e113e185 *build/partial.rdb
+b5d4b42b451348ec50b8e9e6bbb604f8 *README.md
+4a510ba50f0b0d3c779c9459bbe1806c *build/partial.rdb
 c639f7a7ff3efc07980ac8cfedee54a2 *build/vignette.rds
 d44ab91eef4935da13e8108b94c8a2d6 *inst/CITATION
 3b638bc3153596cb5a1dd54773a97bef *inst/doc/RcppThread-vignette.pdf
@@ -20,6 +21,7 @@ afdaad7a6ebe786569a93c13d3b9bda9 *inst/include/RcppThread/Rcout.hpp
 4313550662769fc2154518bf546dc9d0 *inst/include/RcppThread/ThreadPool.hpp
 3706f767f9defafd6b6d22bc0a382cbf *inst/include/RcppThread/parallelFor.hpp
 f410a8fdef03e40005a978bf7e304422 *inst/include/RcppThread/quickpool.hpp
+a27e6497d485b2b6fe5101d5c41f5617 *man/LdFlags.Rd
 6ca1f7dec2c3c12a28048735aa4883b5 *man/RcppThread.Rd
 f39ba6717c8a86d3a6c46a7ba538bc75 *man/detectCores.Rd
 2c6b35ba9a5c69525e4a075bd13e819c *src/detectCores.cpp
